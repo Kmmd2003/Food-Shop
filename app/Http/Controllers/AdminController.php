@@ -82,6 +82,7 @@ class AdminController extends Controller
 
     public function restaurantEdit($id){
         $restaurant = Restaurant::find($id);
+        // $restaurant =  Restaurant::where('id' , '=' , $id)->first();  // secound method
         return view('admin.restaurant-edit' , ['restaurant' => $restaurant]);
     }
 

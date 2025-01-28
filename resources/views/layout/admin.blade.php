@@ -33,10 +33,10 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Home</a>
+        <a href="{{ route('home') }}" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
+        <a href="{{ route('logout') }}" class="nav-link">Logout</a>
       </li>
     </ul>
 
@@ -262,11 +262,16 @@
 <script src={{ asset('panel/plugins/datatables-buttons/js/buttons.html5.min.js') }} ></script>
 <script src={{ asset('panel/plugins/datatables-buttons/js/buttons.print.min.js') }}></script>
 <script src={{ asset('panel/plugins/datatables-buttons/js/buttons.colVis.min.js') }}></script>
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <!-- AdminLTE App -->
 <script src={{ asset('../../dist/js/adminlte.min.js') }}></script>
 
 <!-- Page specific script -->
 <script>
+  tinymce.init({
+    selector: '#tiny'
+  });
+
   $(function () {
     $("#example1").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,

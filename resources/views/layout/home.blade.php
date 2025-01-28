@@ -25,6 +25,9 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ route('admin') }}">Dashboard</a>
             </li> 
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('basket') }}">Basket</a>
+            </li> 
             @else
             <li class="nav-item">
               <a class="nav-link" href="{{ route('login') }}">Login</a>
@@ -33,17 +36,38 @@
               <a class="nav-link" href="{{ route('register') }}">Register</a>
             </li>  
             @endif
+            {{-- <div class="row">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Users: {{ $userCount }}</a>
+              </li> 
+            </div> --}}
           </ul>
-        </div>
+          <ul><ul><ul><ul><ul><ul><ul>
+          <ul><ul><ul><ul><ul><ul><ul>
+          <ul><ul><ul><ul><ul><ul><ul>
+          <ul>
+            <ul>  
+            <form  method="GET" action="{{ route('search') }}" class="row g-3 m-2">
+              <div class="col-auto">
+                <input type="text" class="form-control mr-sm-2" name="q" id="search" placeholder="Search something">
+              </div>
+              <div class="col-auto">
+                <button type="submit" class="btn btn-outline-success">Search</button>
+              </div>
+            </form>
+            </ul>
+          </ul>
+          </ul></ul></ul></ul></ul></ul></ul>
+          </ul></ul></ul></ul></ul></ul></ul>
+          </ul></ul></ul></ul></ul></ul></ul>
       </div>
     </nav>
   </div> 
-  </div>
     <div class="container">
         @yield('content')
 </div>
 </body>
-<footer class="footer-10" style="background-color: #e3f2fd !important;">
+<footer class="footer-10 mt-5" style="background-color: #e3f2fd !important;">
   <div class="container">
     <div class="row mb-5 pb-3 no-gutters">
       <div class="col-md-4 mb-md-0 mb-4 d-flex">

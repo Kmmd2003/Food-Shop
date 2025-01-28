@@ -23,7 +23,7 @@ class RestaurantRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:restaurants,title|string|min:3|max:32' , 
-            'image' => 'required|mimes:png,jpg|max:1000' , 
+            'image' => 'required|mimes:png,jpg|max:2000' , 
             'address' => 'required|max:600'
         ];
     }

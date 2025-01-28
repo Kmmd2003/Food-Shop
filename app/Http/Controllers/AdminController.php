@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Http\Requests\RestaurantRequest;
 use Laravel\Prompts\Prompt;
+use tidy;
 
 class AdminController extends Controller
 {
@@ -35,12 +36,16 @@ class AdminController extends Controller
         $request->validated();
         $name = $request->input('name');
         $address = $request->input('address');
+        $description = $request->input('description');
         $image = time() .'-'.  $request->file('image')->getClientOriginalName();
-        $request->file('image')->move(public_path('img'), $image);
+        $request->file('image')->move(public_path('img') , $image);
+        $is_slide = $request->input('is_slide');
         Restaurant::create([
             'title' => $name , 
             'address' => $address ,
-            'image' => $image 
+            'image' => $image ,
+            'is_slide' => $is_slide ?? 0 , 
+            'description' => $description
         ]);
         return redirect(route('restaurant-List'));
     }
@@ -87,12 +92,53 @@ class AdminController extends Controller
     }
 
     public function restaurantUpdate(Request $request){
-        Restaurant::findOrFail($request->input('id'))
-        ->update([
-            'title' =>$request->input('name') , 
-            'address' =>$request->input('address') ,
-            'image' =>$request->input('image') 
+        $restaurant = Restaurant::findOrFail($request->input('id'));
+        
+        if($restaurant->title != $request->input('name')){
+            $request->validate([
+                'name' => 'required|unique:restaurants,title|string|min:3|max:32'
         ]);
+    }
+
+        $image = false;
+        if ($request->file('image')) {
+            $request->validate([
+                'image' => 'required|mimes:png,jpg|max:2000'
+            ]);
+            
+            $image = time() .'-'.  $request->file('image')->getClientOriginalName();
+            $request->file('image')->move(public_path('img'), $image);
+        }
+
+        $request->validate([
+            'address' => 'required|max:600' , 
+            'description' => 'required|max:600'
+    ]);
+
+       
+        if($image){
+            $restaurant
+        ->update([
+            'title' => $request->input('name') , 
+            'address' => $request->input('address') ,
+            'image' => $request->file('image') , 
+            'is_slide' => $request->input('is_slide') ?? 0 , 
+            'description' => $request->input('description')
+        ]);
+        }
+        else{
+            $restaurant
+            ->update([
+                'title' => $request->input('name') , 
+                'address' => $request->input('address') ,
+                'is_slide' => $request->input('is_slide') ?? 0 ,
+                'description' => $request->input('description')
+            ]);
+        }
+
+        
+
+        
         return redirect(route('restaurant-List'));
     }
 

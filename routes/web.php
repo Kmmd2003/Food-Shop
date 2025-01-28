@@ -4,9 +4,23 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BasketController;
 use App\Http\Controllers\LogoutController;
 
+
 Route::get('/',[HomeController::class , 'home'])->name('home');
+
+Route::get('/basket/list',[HomeController::class , 'basketList'])->name('basket');
+
+Route::get('/basket/add/{product_id}/{restaurant_id}',[BasketController::class , 'add'])->name('basket.add');
+
+Route::get('/checkout/{user_id}',[BasketController::class , 'checkout'])->name('basket.checkout');
+
+Route::get('/delete/basket/{id}',[HomeController::class , 'removeBasket'])->name('delete.basket')->middleware(['auth' , 'auth.role.admin']);
+
+Route::get('/search',[HomeController::class , 'search'])->name('search');
+
+Route::get('/category/{id}',[HomeController::class , 'category'])->name('home.category');
 
 Route::get('/restaurants/{id}',[HomeController::class , 'restaurants'])->name('restaurants');
 

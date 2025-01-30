@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class userApiController extends Controller
+class UserApiController extends Controller
 {
     public function register(Request $request){
         $data = $request->validate([
@@ -19,7 +19,7 @@ class userApiController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password'])
         ]);
-        $token = $user->createToken('mmd_food')->toArray()['plainTextToken'];
+        $token = $user->createToken('*')->toArray()['plainTextToken'];
         return $token;
     }
 }

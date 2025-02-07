@@ -31,10 +31,13 @@ class UserApiController extends Controller
     }
 
     public function login(Request $request){
-        $data = $request->validate([
+        $data = Validator::make($request->all() , [
             'email' => 'required|email',
             'password' => 'required|string'
         ]);
+        if($data->errors()->any()){
+            return $data->errors();
+        }
 
         $user = User::where('email' , '=' , $data['email'])->first();
 

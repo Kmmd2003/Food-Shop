@@ -19,7 +19,6 @@ class HomeController extends Controller
         $bestRestaurants = Restaurant::orderByDesc('counter')->limit(5)->get();
         $categories = Category::all();
         $userCount = User::all()->count();
-
         $sliderShowRestaurant = Restaurant::where('is_slide' , '=' , 1)->orderbyDesc('updated_at')->limit(3)->get();
         return view('front.index' , [
          'restaurants' => $restaurants ,

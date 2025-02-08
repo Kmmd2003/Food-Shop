@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminCategoryApiController;
 use App\Http\Controllers\AdminProductApiController;
 use App\Http\Controllers\AdminRestaurantApiController;
 use App\Http\Controllers\carApiController;
+use App\Http\Controllers\FrontApiController;
 use App\Http\Controllers\UserApiController;
 use App\Models\Cars;
 use Illuminate\Http\Request;
@@ -54,6 +55,12 @@ Route::post('/admin/products', [AdminProductApiController::class , 'create'])->m
 Route::put('/admin/products/{id}', [AdminProductApiController::class , 'update'])->middleware(['auth:sanctum' , 'auth.role.admin.json']);
 
 Route::delete('/admin/products/{id}', [AdminProductApiController::class , 'delete'])->middleware(['auth:sanctum' , 'auth.role.admin.json']);
+
+Route::get('/restaurants/search/{q}', [FrontApiController::class , 'search'])->middleware(['auth:sanctum' , 'auth.role.admin.json']);
+
+Route::get('/front', [FrontApiController::class , 'index'])->middleware(['auth:sanctum' , 'auth.role.admin.json']);
+
+Route::get('/front/restaurant/{id}', [FrontApiController::class , 'restaurant'])->middleware(['auth:sanctum' , 'auth.role.admin.json']);
 
 
 

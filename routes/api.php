@@ -15,9 +15,9 @@ use Illuminate\Support\Facades\Route;
 //     return [Cars::all()];
 // });
 
-Route::get('/cars' , [carApiController::class , 'index'])->middleware(['auth:sanctum' , 'auth.role.admin.json']);
+// Route::get('/cars' , [carApiController::class , 'index'])->middleware(['auth:sanctum' , 'auth.role.admin.json']);
 
-Route::post('/cars/insert' , [carApiController::class , 'insert'])->middleware(['auth:sanctum' , 'auth.role.admin.json']);
+// Route::post('/cars/insert' , [carApiController::class , 'insert'])->middleware(['auth:sanctum' , 'auth.role.admin.json']);
 
 Route::post('/register', [UserApiController::class , 'register'])->middleware(['auth:sanctum' , 'auth.role.admin.json']);
 

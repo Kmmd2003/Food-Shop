@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\UserRegister;
 use App\Models\Basket;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -11,10 +12,12 @@ use App\Models\Product;
 use App\Models\ProductBasket;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
     public function home(){
+        Mail::to('testt200003@gmail.com')->send(new UserRegister());
         $restaurants = Restaurant::orderByDesc('created_at')->limit(5)->get();
         $bestRestaurants = Restaurant::orderByDesc('counter')->limit(5)->get();
         $categories = Category::all();

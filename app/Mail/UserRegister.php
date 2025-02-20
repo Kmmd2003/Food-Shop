@@ -12,13 +12,13 @@ use Illuminate\Queue\SerializesModels;
 class UserRegister extends Mailable
 {
     use Queueable, SerializesModels;
-
+    public $details;
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($details)
     {
-        //
+        $this->details = $details;
     }
 
     /**
@@ -37,7 +37,7 @@ class UserRegister extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'email.register-user',
+            view:'email.register-user'
         );
     }
 
@@ -46,8 +46,8 @@ class UserRegister extends Mailable
      *
      * @return array<int, \Illuminate\Mail\Mailables\Attachment>
      */
-    public function attachments(): array
+    public function attachments($details): array
     {
-        return [];
+        return ['details' => $this->$details];
     }
 }

@@ -6,8 +6,8 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>User Registeres</h1>
-    <p>this is description from user register</p>
+    <h1>{{ $details['title'] }}</h1>
+    <p>{{ $details['body'] }}</p>
     <p>Thanks !</p>
 </body>
 </html>
